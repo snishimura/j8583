@@ -1,11 +1,11 @@
 package com.solab.iso8583;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /** Tests formatting of certain IsoTypes.
  * 
@@ -17,12 +17,26 @@ public class TestFormats {
 
 	@Test
 	public void testDateFormats() {
-		Assert.assertEquals("0125213456", IsoType.DATE10.format(date, null));
-        Assert.assertEquals("0125", IsoType.DATE4.format(date, null));
-        Assert.assertEquals("7301", IsoType.DATE_EXP.format(date, null));
-        Assert.assertEquals("213456", IsoType.TIME.format(date, null));
-        Assert.assertEquals("730125213456", IsoType.DATE12.format(date, null));
-		Assert.assertEquals("19730125213456", IsoType.DATE14.format(date, null));
+		TimeZone systemTimeZone = TimeZone.getDefault();
+
+		String expected = IsoType.DATE10.format(date, systemTimeZone);
+		Assert.assertEquals(expected, IsoType.DATE10.format(date, null));
+
+		expected = IsoType.DATE4.format(date, systemTimeZone);
+        Assert.assertEquals(expected, IsoType.DATE4.format(date, null));
+
+        expected = IsoType.DATE_EXP.format(date, systemTimeZone);
+        Assert.assertEquals(expected, IsoType.DATE_EXP.format(date, null));
+
+		expected = IsoType.TIME.format(date, systemTimeZone);
+        Assert.assertEquals(expected, IsoType.TIME.format(date, null));
+
+        expected = IsoType.DATE12.format(date, null);
+        Assert.assertEquals(expected, IsoType.DATE12.format(date, null));
+
+        expected = IsoType.DATE14.format(date, null);
+		Assert.assertEquals(expected, IsoType.DATE14.format(date, null));
+
         //Now with GMT
         TimeZone gmt = TimeZone.getTimeZone("GMT");
         Assert.assertEquals("0126033456", IsoType.DATE10.format(date, gmt));
