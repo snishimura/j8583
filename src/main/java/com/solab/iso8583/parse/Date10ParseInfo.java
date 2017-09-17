@@ -18,14 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 */
 package com.solab.iso8583.parse;
 
+import com.solab.iso8583.CustomField;
+import com.solab.iso8583.IsoType;
+import com.solab.iso8583.IsoValue;
+
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-
-import com.solab.iso8583.CustomField;
-import com.solab.iso8583.IsoType;
-import com.solab.iso8583.IsoValue;
 
 /** This class is used to parse fields of type DATE10.
  * 
@@ -71,7 +71,7 @@ public class Date10ParseInfo extends DateTimeParseInfo {
             cal.setTimeZone(tz);
         }
 		adjustWithFutureTolerance(cal);
-		return new IsoValue<>(type, cal.getTime(), null);
+		return createIsoValue(cal.getTime());
 	}
 
 	@Override

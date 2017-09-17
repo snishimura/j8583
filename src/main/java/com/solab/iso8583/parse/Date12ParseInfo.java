@@ -63,7 +63,7 @@ public class Date12ParseInfo extends DateTimeParseInfo {
             cal.setTimeZone(tz);
         }
    		adjustWithFutureTolerance(cal);
-   		return new IsoValue<>(type, cal.getTime(), null);
+        return createIsoValue(cal.getTime());
    	}
 
    	@Override

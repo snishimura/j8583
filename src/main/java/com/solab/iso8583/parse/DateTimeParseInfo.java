@@ -1,8 +1,10 @@
 package com.solab.iso8583.parse;
 
 import com.solab.iso8583.IsoType;
+import com.solab.iso8583.IsoValue;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -27,8 +29,17 @@ public abstract class DateTimeParseInfo extends FieldParseInfo {
     public void setTimeZone(TimeZone value) {
         tz = value;
     }
+
     public TimeZone getTimeZone() {
         return tz;
+    }
+
+    protected IsoValue<Date> createIsoValue(Date date) {
+        IsoValue<Date> value = new IsoValue<>(type, date, null);
+        value.setTimeZone(getTimeZone());
+        value.setCharacterEncoding(getCharacterEncoding());
+
+        return value;
     }
 
     public static void adjustWithFutureTolerance(Calendar cal) {

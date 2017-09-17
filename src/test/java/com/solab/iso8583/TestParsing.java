@@ -119,6 +119,7 @@ public class TestParsing {
         Assert.assertEquals(25, cal.get(Calendar.DATE));
         Assert.assertEquals(21, cal.get(Calendar.HOUR_OF_DAY));
 		Assert.assertEquals("debug string should match", "060002000000000000000125213456", m.debugString());
+		Assert.assertNull("Expect default timezone as null", m.getAt(7).getTimeZone());
 
         mf.setTimezoneForParseGuide(0x600, 7, TimeZone.getTimeZone("GMT"));
         m = mf.parseMessage("060002000000000000000125213456".getBytes(), 0);
@@ -128,6 +129,7 @@ public class TestParsing {
         Assert.assertEquals(Calendar.JANUARY, cal.get(Calendar.MONTH));
         Assert.assertEquals(25, cal.get(Calendar.DATE));
         Assert.assertEquals(21, cal.get(Calendar.HOUR_OF_DAY));
+        Assert.assertEquals(TimeZone.getTimeZone("GMT"), m.getAt(7).getTimeZone());
 
         mf.setTimezoneForParseGuide(0x600, 7, TimeZone.getTimeZone("GMT+0100"));
         m = mf.parseMessage("060002000000000000000125213456".getBytes(), 0);
@@ -137,6 +139,6 @@ public class TestParsing {
         Assert.assertEquals(Calendar.JANUARY, cal.get(Calendar.MONTH));
         Assert.assertEquals(25, cal.get(Calendar.DATE));
         Assert.assertEquals(21, cal.get(Calendar.HOUR_OF_DAY));
+		Assert.assertEquals(TimeZone.getTimeZone("GMT+0100"), m.getAt(7).getTimeZone());
     }
-
 }
