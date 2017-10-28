@@ -137,6 +137,29 @@ public class TestParsing {
         Assert.assertEquals(Calendar.JANUARY, cal.get(Calendar.MONTH));
         Assert.assertEquals(25, cal.get(Calendar.DATE));
         Assert.assertEquals(21, cal.get(Calendar.HOUR_OF_DAY));
+
+        m = mf.parseMessage("0800201080000000000012345612311231".getBytes(), 0);
+        f = m.getObjectValue(12);
+        cal.setTimeZone(TimeZone.getDefault());
+        cal.setTime(f);
+        Assert.assertEquals(Calendar.DECEMBER, cal.get(Calendar.MONTH));
+		Assert.assertEquals(31, cal.get(Calendar.DATE));
+		Assert.assertEquals(0, cal.get(Calendar.HOUR_OF_DAY));
+		Assert.assertEquals(0, cal.get(Calendar.MINUTE));
+		Assert.assertEquals(0, cal.get(Calendar.SECOND));
+		Assert.assertEquals(0, cal.get(Calendar.MILLISECOND));
     }
 
+    @Test
+	public void date4() {
+
+		Calendar calendar = Calendar.getInstance();
+
+//		calendar.set(Calendar.HOUR_OF_DAY, 1);
+//		System.out.println("Time: " + calendar.getTime());
+
+		calendar.set(Calendar.HOUR, -12);
+		System.out.println("Time: " + calendar.getTime());
+
+	}
 }

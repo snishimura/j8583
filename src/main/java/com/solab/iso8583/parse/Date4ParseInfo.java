@@ -18,14 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 */
 package com.solab.iso8583.parse;
 
+import com.solab.iso8583.CustomField;
+import com.solab.iso8583.IsoType;
+import com.solab.iso8583.IsoValue;
+
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-
-import com.solab.iso8583.CustomField;
-import com.solab.iso8583.IsoType;
-import com.solab.iso8583.IsoValue;
 
 /** This class is used to parse fields of type DATE4.
  * 
@@ -50,7 +50,7 @@ public class Date4ParseInfo extends DateTimeParseInfo {
                     "Insufficient data for DATE4 field %d, pos %d", field, pos), pos);
 		}
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR, 0);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
